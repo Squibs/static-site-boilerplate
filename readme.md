@@ -3,3 +3,4 @@
 - Bootstrap 4
 - Webpack
 - Sass
+- Babel
