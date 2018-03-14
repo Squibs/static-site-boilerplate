@@ -23,7 +23,7 @@ function generateHtmlPlugins(templateDir) {
 const htmlPlugins = generateHtmlPlugins('./src/');
 
 module.exports = {
-  entry: ['./src/entry.js', './src/scss/main.scss'],
+  entry: ['./src/entry.js', './src/scss/entry.scss'],
 
   output: {
     path: path.resolve(__dirname, 'dist'),

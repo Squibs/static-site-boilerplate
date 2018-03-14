@@ -1,0 +1,17 @@
+@import "~bootstrap/scss/bootstrap";
+@import "./main.scss";
+
+
+// reduce entry size by using imports instead of importing all of bootstrap EXAMPLE:
+
+// // required
+// @import "~bootstrap/scss/functions";
+// @import "~bootstrap/scss/variables";
+// @import "~bootstrap/scss/mixins";
+
+// // optional
+// @import "node_modules/bootstrap/scss/reboot";
+// @import "node_modules/bootstrap/scss/type";
+// @import "node_modules/bootstrap/scss/images";
+// @import "node_modules/bootstrap/scss/grid";
+// @import "~bootstrap/scss/utilities/text";

@@ -1,7 +1,7 @@
 {
   "name": "static-site-boilerplate",
   "version": "1.0.0",
-  "description": "- Bootstrap 4\r - Sass",
+  "description": "Boilerplate for static websites using: Webpack, Sass, Bootstrap, Eslint (Airbnb's eslintrc), Babel, FontAwesome",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,8 +10,19 @@
     "watch": "webpack --watch",
     "start": "webpack-dev-server --open --mode development"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "Static",
+    "Website",
+    "Boilerplate",
+    "Webpack",
+    "Sass",
+    "Bootstrap",
+    "Eslint",
+    "Airbnb",
+    "Babel",
+    "FontAwesome"
+  ],
+  "author": "Zachary Holman",
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^4.0.0",
@@ -19,6 +30,7 @@
     "popper.js": "^1.14.1"
   },
   "devDependencies": {
+    "autoprefixer": "^8.1.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
@@ -38,7 +50,7 @@
     "webpack-cli": "^2.0.11",
     "webpack-dev-server": "^3.1.1"
   },
-  "browserlist": [
+  "browserslist": [
     "last 2 versions"
   ]
 }
