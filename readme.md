@@ -1,10 +1,10 @@
 # Boilerplate for Static Websites
 
+- Webpack
+- Sass
 - Bootstrap 4
   - jQuery
   - Popper
-- Webpack
-- Sass
 - Babel
 - Eslint (Airbnb eslintrc)
 - FontAwesome

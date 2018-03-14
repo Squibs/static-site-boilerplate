@@ -68,7 +68,7 @@ module.exports = {
 
   plugins: [
     new ExtractTextPlugin({
-      filename: 'css/main.css',
+      filename: 'css/bundle.css',
     }),
   ].concat(htmlPlugins),
 
