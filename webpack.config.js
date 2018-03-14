@@ -3,7 +3,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const fs = require('fs'); // node file system module (to read directory contents)
 
-// thank you to Frank Kelleher (extri.co)
+// Thank you to Frank Kelleher (extri.co)
 // https://extri.co/2017/07/11/generating-multiple-html-pages-with-htmlwebpackplugin/
 function generateHtmlPlugins(templateDir) {
   // retrieve directory contents of passed directory
@@ -20,10 +20,12 @@ function generateHtmlPlugins(templateDir) {
   }));
 }
 
+// Generate array in which will be used by HtmlWebPackPlugin
 const htmlPlugins = generateHtmlPlugins('./src/');
 
+// Webpack Setup
 module.exports = {
-  entry: ['./src/entry.js', './src/scss/entry.scss'],
+  entry: ['./src/js/entry.js', './src/scss/entry.scss'],
 
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -70,7 +72,7 @@ module.exports = {
     new ExtractTextPlugin({
       filename: 'css/bundle.css',
     }),
-  ].concat(htmlPlugins),
+  ].concat(htmlPlugins), // Inserts a new HtmlWebPackPlugin for each .html file
 
   devServer: {
     contentBase: './build',
