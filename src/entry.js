@@ -1,3 +1,4 @@
+import 'bootstrap';
 import './js/main';
 
 console.log("I'm just a silly little entry point!");

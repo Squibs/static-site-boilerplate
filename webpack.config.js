@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const fs = require('fs'); // node file system module (to read directory contents)
 
 // thank you to Frank Kelleher (extri.co)
@@ -22,7 +23,7 @@ function generateHtmlPlugins(templateDir) {
 const htmlPlugins = generateHtmlPlugins('./src/');
 
 module.exports = {
-  entry: './src/entry.js',
+  entry: ['./src/entry.js', './src/scss/main.scss'],
 
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -45,15 +46,30 @@ module.exports = {
       {
         test: /\.js$/i,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
+        use: { loader: 'babel-loader' },
+      },
+
+      {
+        test: /\.scss$/i,
+        use: ExtractTextPlugin.extract({
+          use: [
+            {
+              loader: 'css-loader',
+              options: { mimimize: true },
+            },
+            { loader: 'postcss-loader' },
+            { loader: 'sass-loader' },
+          ],
+        }),
       },
 
     ],
   },
 
   plugins: [
+    new ExtractTextPlugin({
+      filename: 'css/main.css',
+    }),
   ].concat(htmlPlugins),
 
   devServer: {
