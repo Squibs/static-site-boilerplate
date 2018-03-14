@@ -23,6 +23,7 @@ const htmlPlugins = generateHtmlPlugins('./src/');
 
 module.exports = {
   entry: './src/entry.js',
+
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/bundle.js',
@@ -30,13 +31,7 @@ module.exports = {
 
   module: {
     rules: [
-      {
-        test: /\.js$/i,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
-      },
+
       {
         test: /\.html$/i,
         use: [
@@ -46,6 +41,15 @@ module.exports = {
           },
         ],
       },
+
+      {
+        test: /\.js$/i,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+
     ],
   },
 
