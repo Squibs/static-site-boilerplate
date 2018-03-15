@@ -25,4 +25,4 @@ console.log('I\'m just a silly little entry point!');
 
 // sample ES6 code will be transpiled by Babel then minimized on build
 const app = (a, b) => a + b;
-console.log(app(4, 6));
+console.log('ES6 compiling works (answer 10): ', app(4, 6));

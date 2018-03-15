@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const fs = require('fs'); // node file system module (to read directory contents)
 
 // Thank you to Frank Kelleher (extri.co)
@@ -28,7 +29,7 @@ module.exports = {
   entry: ['./src/js/entry.js', './src/scss/entry.scss'],
 
   output: {
-    path: path.resolve(__dirname, './dist/'),
+    path: path.resolve(__dirname, './public/'),
     filename: 'js/bundle.js',
   },
 
@@ -98,12 +99,28 @@ module.exports = {
         ],
       },
 
+      {
+        test: /\.php$/i,
+        include: /php/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: './php/[name].[ext]',
+            },
+          },
+        ],
+      },
+
     ],
   },
 
   plugins: [
     new ExtractTextPlugin({
       filename: 'css/bundle.css',
+    }),
+    new BrowserSyncPlugin({
+      proxy: 'localhost:8001',
     }),
   ].concat(htmlPlugins), // Inserts a new HtmlWebpackPlugin for each .html file
 
