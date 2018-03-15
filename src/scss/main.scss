@@ -1,7 +1,14 @@
+body {
+  background-color: rgb(225, 225, 225);
+  font-family: 'rtRaleway';
+}
+
 h1 {
-  color: red;
+  color: rgb(230, 50, 50);
   margin-bottom: 20px;
 }
+
+h2 { text-decoration: underline black; }
 
 footer, footer p {
   margin-top: 20px;

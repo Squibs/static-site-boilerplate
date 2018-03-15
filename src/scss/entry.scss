@@ -1,6 +1,16 @@
 @import '~bootstrap/scss/bootstrap';
 @import './main.scss'; // load main css last to override other styles
 
+@font-face {
+  font-family: 'rtRaleway';
+  src: url('../webfonts/rtraleway-regular-webfont.eot'); /* IE9 Compat Modes */
+  src: url('../webfonts/rtraleway-regular-webfont.eot?#iefiex') format('embedded-opentype'), /* IE6 - IE8 */
+       url('../webfonts/rtraleway-regular-webfont.woff2') format('woff2'), /* Modern Browsers */
+       url('../webfonts/rtraleway-regular-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../webfonts/rtraleway-regular-webfont.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../webfonts/rtraleway-regular-webfont.svg') format('svg'); /* Legacy iOS */
+}
+
 ///////////////////////////////////////////////////////////////////////////
 // Reduce entry.scss file-size by importing Bootstrap styles individually
 // (https://getbootstrap.com/docs/4.0/getting-started/theming/#importing)

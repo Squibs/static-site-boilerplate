@@ -28,7 +28,7 @@ module.exports = {
   entry: ['./src/js/entry.js', './src/scss/entry.scss'],
 
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, './dist/'),
     filename: 'js/bundle.js',
   },
 
@@ -47,12 +47,13 @@ module.exports = {
 
       {
         test: /\.js$/i,
-        exclude: /node_modules/,
+        include: /js/,
         use: { loader: 'babel-loader' },
       },
 
       {
         test: /\.scss$/i,
+        include: /scss/,
         use: ExtractTextPlugin.extract({
           use: [
             {
@@ -63,6 +64,38 @@ module.exports = {
             { loader: 'sass-loader' },
           ],
         }),
+      },
+
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        include: /img/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              name: './img/[name].[ext]',
+              limit: 10000,
+              fallback: 'file-loader',
+            },
+          },
+          { loader: 'img-loader' },
+        ],
+      },
+
+      {
+        test: /\.(woff2?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/i,
+        include: /webfonts/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              name: './webfonts/[name].[ext]',
+              limit: 10000,
+              fallback: 'file-loader',
+              publicPath: '../', // fixes url-loader/file-loader loacl url issues (url becomes: .././rest-of-url)
+            },
+          },
+        ],
       },
 
     ],
