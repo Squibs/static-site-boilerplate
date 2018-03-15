@@ -1,5 +1,5 @@
 const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const fs = require('fs'); // node file system module (to read directory contents)
 
@@ -13,14 +13,14 @@ function generateHtmlPlugins(templateDir) {
   templateFiles = templateFiles.filter(item => /\.html$/i.test(item));
 
   // return new array created from each html item
-  return templateFiles.map(item => new HtmlWebPackPlugin({
+  return templateFiles.map(item => new HtmlWebpackPlugin({
     filename: item,
     template: path.resolve(__dirname, `${templateDir}/${item}`),
     favicon: './src/favicon/favicon.ico',
   }));
 }
 
-// Generate array in which will be used by HtmlWebPackPlugin
+// Generate array in which will be used by HtmlWebpackPlugin
 const htmlPlugins = generateHtmlPlugins('./src/');
 
 // Webpack Setup
@@ -105,7 +105,7 @@ module.exports = {
     new ExtractTextPlugin({
       filename: 'css/bundle.css',
     }),
-  ].concat(htmlPlugins), // Inserts a new HtmlWebPackPlugin for each .html file
+  ].concat(htmlPlugins), // Inserts a new HtmlWebpackPlugin for each .html file
 
   devServer: {
     contentBase: './build',
