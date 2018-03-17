@@ -48,8 +48,14 @@ I have the project structured like this:
 │   ├── index.html (index at web root)
 │   └── page2.html (second or more html files)
 ├── src (development/source code which will be 'packed' by Webpack)
-│   ├── favicon (favicon relate files)
-│   │   └── favicon.ico
+│   ├── favicon (favicon related files)
+│   │   ├── android-chrome-512x512.png
+│   │   ├── apple-touch-icon.png
+│   │   ├── browserconfig.xml
+│   │   ├── favicon.ico
+│   │   ├── favicon-32x32.png
+│   │   ├── safari-pinned-tab.svg
+│   │   └── site.webmanifest
 │   ├── img (unoptimized images)
 │   │   ├── img-large.jpg
 │   │   └── img-small.svg
