@@ -78,7 +78,8 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              name: './img/[name].[ext]',
+              name: '[path][name].[ext]',
+              context: 'src',
               limit: 10000,
               fallback: 'file-loader',
             },
@@ -95,7 +96,8 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              name: './webfonts/[name].[ext]',
+              name: '[path][name].[ext]',
+              context: 'src',
               limit: 10000,
               fallback: 'file-loader',
               publicPath: '../', // fixes url-loader/file-loader loacl url issues (url becomes: .././rest-of-url)
@@ -112,7 +114,8 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: './php/[name].[ext]',
+              name: '[path][name].[ext]',
+              context: 'src',
             },
           },
         ],
