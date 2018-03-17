@@ -44,7 +44,7 @@ I have the project structured like this:
 │   │   ├── rtraleway-regular-webfont.ttf
 │   │   ├── rtraleway-regular-webfont.woff
 │   │   └── rtraleway-regular-webfont.woff2
-│   ├── favicon.ico (favicons at web root)
+│   ├── favicon.ico (favicon related files at web root)
 │   ├── index.html (index at web root)
 │   └── page2.html (second or more html files)
 ├── src (development/source code which will be 'packed' by Webpack)

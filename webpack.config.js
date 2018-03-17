@@ -36,6 +36,7 @@ module.exports = {
   module: {
     rules: [
 
+      // src/*.html files
       {
         test: /\.html$/i,
         use: [
@@ -46,12 +47,14 @@ module.exports = {
         ],
       },
 
+      // src/js/*.js files
       {
         test: /\.js$/i,
         include: /js/,
         use: { loader: 'babel-loader' },
       },
 
+      // src/scss/*.scss files
       {
         test: /\.scss$/i,
         include: /scss/,
@@ -67,6 +70,7 @@ module.exports = {
         }),
       },
 
+      // src/img/ files
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         include: /img/,
@@ -83,6 +87,7 @@ module.exports = {
         ],
       },
 
+      // src/webfont/ files
       {
         test: /\.(woff2?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/i,
         include: /webfonts/,
@@ -99,6 +104,7 @@ module.exports = {
         ],
       },
 
+      // src/php/ files
       {
         test: /\.php$/i,
         include: /php/,
@@ -107,6 +113,20 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: './php/[name].[ext]',
+            },
+          },
+        ],
+      },
+
+      // src/favicon/ files
+      {
+        test: /\.(jpe?g|png|gif|svg|xml|webmanifest|ico)$/i,
+        include: /favicon/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: './[name].[ext]',
             },
           },
         ],
