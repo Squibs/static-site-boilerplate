@@ -5,7 +5,7 @@ console.log("I'm from the main.js!");
 // webpack-dev-server does not serve PHP files
 function submitPHPTestForm() {
   const testText = document.getElementById('phpTestText').value;
-  const testPHP = require('../php/main.php'); // eslint-disable-line global-require
+  const testPHP = require('../php/test-form.php'); // eslint-disable-line global-require
   const xhr = new XMLHttpRequest();
 
   xhr.open('POST', testPHP, true);
