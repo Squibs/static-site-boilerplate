@@ -44,10 +44,15 @@ I have the project structured like this:
 │   │   ├── rtraleway-regular-webfont.ttf
 │   │   ├── rtraleway-regular-webfont.woff
 │   │   └── rtraleway-regular-webfont.woff2
+│   ├── .htaccess (and other files that need to be at the web root)
 │   ├── favicon.ico (favicon related files at web root)
 │   ├── index.html (index at web root)
 │   └── page2.html (second or more html files)
 ├── src (development/source code which will be 'packed' by Webpack)
+│   ├── ^root (any other file that needs to go to the web root)
+│   │   ├── .htaccess
+│   │   ├── robots.txt
+│   │   └── sitemap.xml
 │   ├── favicon (favicon related files)
 │   │   ├── android-chrome-512x512.png
 │   │   ├── apple-touch-icon.png

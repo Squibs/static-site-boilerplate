@@ -57,7 +57,7 @@ module.exports = {
       // src/scss/*.scss files
       {
         test: /\.scss$/i,
-        include: /scss/,
+        include: path.resolve(__dirname, 'src/scss/'),
         use: ExtractTextPlugin.extract({
           use: [
             {
@@ -73,7 +73,7 @@ module.exports = {
       // src/img/ files
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
-        include: /img/,
+        include: path.resolve(__dirname, 'src/img/'),
         use: [
           {
             loader: 'url-loader',
@@ -91,7 +91,7 @@ module.exports = {
       // src/webfont/ files
       {
         test: /\.(woff2?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/i,
-        include: /webfonts/,
+        include: path.resolve(__dirname, 'src/webfonts/'),
         use: [
           {
             loader: 'url-loader',
@@ -109,7 +109,7 @@ module.exports = {
       // src/php/ files
       {
         test: /\.php$/i,
-        include: /php/,
+        include: path.resolve(__dirname, 'src/php/'),
         use: [
           {
             loader: 'file-loader',
@@ -124,12 +124,40 @@ module.exports = {
       // src/favicon/ files
       {
         test: /\.(jpe?g|png|gif|svg|xml|webmanifest|ico)$/i,
-        include: /favicon/,
+        include: path.resolve(__dirname, 'src/favicon/'),
         use: [
           {
             loader: 'file-loader',
             options: {
               name: './[name].[ext]',
+            },
+          },
+        ],
+      },
+
+      // other root files
+      {
+        test: /\.(txt|xml)$/i,
+        include: path.resolve(__dirname, 'src/^root/'),
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: './[name].[ext]',
+            },
+          },
+        ],
+      },
+
+      // .htaccess
+      {
+        test: /\.(htaccess)$/i,
+        include: path.resolve(__dirname, 'src/^root/'),
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: './.htaccess',
             },
           },
         ],

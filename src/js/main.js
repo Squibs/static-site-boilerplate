@@ -20,7 +20,10 @@ function submitPHPTestForm() {
 }
 
 // PHP form submit listener
-document.getElementById('phpTestForm').addEventListener('submit', (event) => {
-  event.preventDefault();
-  submitPHPTestForm();
-});
+if (window.location.pathname === '/index.html') {
+  document.getElementById('phpTestForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+    submitPHPTestForm();
+  });
+}
+
