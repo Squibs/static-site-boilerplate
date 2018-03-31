@@ -111,7 +111,7 @@ Watch for file changes and auto refresh via Browsersync:
 npm run watch
 ```
 
-Bundle the website for distribution (using Webpack 4 production mode flag):
+Bundle the website for distribution (using Webpack 4 'production' mode flag):
 
 ```
 npm run build
