@@ -42,7 +42,7 @@ module.exports = {
         use: [
           {
             loader: 'html-loader',
-            options: { mimimize: true },
+            options: { minimize: true },
           },
         ],
       },
@@ -62,7 +62,7 @@ module.exports = {
           use: [
             {
               loader: 'css-loader',
-              options: { mimimize: true },
+              options: { minimize: true },
             },
             { loader: 'postcss-loader' },
             { loader: 'sass-loader' },
