@@ -4,7 +4,7 @@ This is a boilerplate for static websites uses Webpack to optimize and bundle fi
 
 ## Introduction
 
-At the time of creating this boilerplate, Webpack 4 was just barely released; and I hade little knowledge of using any form of task runner (Gulp/Grunt), build tool/system, or module bundler. I managed to increase my knowledge of Webpack enough to create this boilerplate using the little amount of Webpack 4 documentation and tutorials available (mainly what was on the `next` branch on the webpack.js.org repository), and the previous documentation and tutorials for Webpack (Webpack 2 & 3); so hopefully I am learning/using Webpack 4 correctly.
+At the time of creating this boilerplate, Webpack 4 was just barely released; and I had little knowledge of using any form of task runner (Gulp/Grunt), build tool/system, or module bundler. I managed to increase my knowledge of Webpack enough to create this boilerplate using the little amount of Webpack 4 documentation and tutorials available (mainly what was on the `next` branch on the webpack.js.org repository), and the previous documentation and tutorials for Webpack (Webpack 2 & 3); so hopefully I am learning/using Webpack 4 correctly.
 
 ## Features
 
