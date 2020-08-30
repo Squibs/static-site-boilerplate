@@ -61,5 +61,17 @@
   },
   "browserslist": [
     "last 2 versions"
-  ]
+  ],
+  "babel": {
+    "presets": ["@babel/preset-env"]
+  },
+  "eslintConfig": {
+    "extends": "airbnb",
+    "env": {
+      "browser": true
+    },
+    "rules": {
+      "func-names": ["error", "never"]
+    }
+  }
 }
