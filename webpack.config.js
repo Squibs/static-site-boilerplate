@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const fs = require('fs'); // node file system module (to read directory contents)
 
 // Thank you to Frank Kelleher (extri.co)
@@ -11,10 +12,10 @@ function generateHtmlPlugins(templateDir) {
   let templateFiles = fs.readdirSync(path.resolve(__dirname, templateDir));
 
   // filter out any non-html directory contents
-  templateFiles = templateFiles.filter(item => /\.html$/i.test(item));
+  templateFiles = templateFiles.filter((item) => /\.html$/i.test(item));
 
   // return new array created from each html item
-  return templateFiles.map(item => new HtmlWebpackPlugin({
+  return templateFiles.map((item) => new HtmlWebpackPlugin({
     filename: item,
     template: path.resolve(__dirname, `${templateDir}/${item}`),
     favicon: './src/favicon/favicon.ico',
@@ -64,14 +65,14 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: (loader) => [
+              plugins: () => [
                 require('cssnano'),
-                require('autoprefixer')
-              ]
-            }
+                require('autoprefixer'),
+              ],
+            },
           },
           { loader: 'sass-loader' },
-        ]
+        ],
       },
 
       // src/img/ files
@@ -171,6 +172,7 @@ module.exports = {
   },
 
   plugins: [
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/bundle.css',
     }),

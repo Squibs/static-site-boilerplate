@@ -5,7 +5,7 @@ console.log("I'm from the main.js!");
 // webpack-dev-server does not serve PHP files
 function submitPHPTestForm() {
   const testText = document.getElementById('phpTestText').value;
-  // probably the wrong way to do this, but it works
+  // probably the wrong way to do this, but it works and it's just an example
   const testPHP = require('../php/test-form.php').default; // eslint-disable-line global-require
   const xhr = new XMLHttpRequest();
 
@@ -17,12 +17,12 @@ function submitPHPTestForm() {
       document.getElementById('status').innerHTML = returnData;
     }
   };
-  
+
   xhr.send(`message=${testText}`);
 }
 
 // PHP form submit listener
-  document.getElementById('phpTestForm').addEventListener('submit', (event) => {
-    event.preventDefault();
-    submitPHPTestForm();
-  });
+document.getElementById('phpTestForm').addEventListener('submit', (event) => {
+  event.preventDefault();
+  submitPHPTestForm();
+});
