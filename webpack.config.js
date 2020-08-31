@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const fs = require('fs'); // node file system module (to read directory contents)
 
@@ -56,18 +56,22 @@ module.exports = {
 
       // src/scss/*.scss files
       {
-        test: /\.scss$/i,
+        test: /\.s[ac]ss$/i,
         include: path.resolve(__dirname, 'src/scss/'),
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: 'css-loader',
-              options: { minimize: true },
-            },
-            { loader: 'postcss-loader' },
-            { loader: 'sass-loader' },
-          ],
-        }),
+        use: [
+          { loader: MiniCssExtractPlugin.loader },
+          { loader: 'css-loader' },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: (loader) => [
+                require('cssnano'),
+                require('autoprefixer')
+              ]
+            }
+          },
+          { loader: 'sass-loader' },
+        ]
       },
 
       // src/img/ files
@@ -167,7 +171,7 @@ module.exports = {
   },
 
   plugins: [
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: 'css/bundle.css',
     }),
     new BrowserSyncPlugin({
