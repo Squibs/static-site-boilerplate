@@ -96,17 +96,17 @@ I have the project structured like this:
 When repository is initially cloned run Initial setup:
 
 ```
+yarn
+```
+```
 npm install
 ```
 
-Create the Scotch Box pre-configured Vagrant Box:
+Create/Run the Scotch Box pre-configured Vagrant Box, then Watch for file changes and auto refresh via Browsersync proxy:
 
 ```
-vagrant up
+yarn watch
 ```
-
-Watch for file changes and auto refresh via Browsersync:
-
 ```
 npm run watch
 ```
@@ -114,11 +114,29 @@ npm run watch
 Bundle the website for distribution (using Webpack 4 'production' mode flag):
 
 ```
+yarn build
+```
+```
 npm run build
 ```
 
 Alternatively use webpack-dev-server over `watch` script:
 
 ```
+yarn start
+```
+```
 npm run start
+```
+
+Halt/power off the Vagrant box
+
+```
+yarn stop
+```
+```
+npm run stop
+```
+```
+vagrant halt
 ```

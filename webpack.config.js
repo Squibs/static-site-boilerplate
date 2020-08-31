@@ -1,7 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const fs = require('fs'); // node file system module (to read directory contents)
 
 // Thank you to Frank Kelleher (extri.co)
@@ -11,10 +12,10 @@ function generateHtmlPlugins(templateDir) {
   let templateFiles = fs.readdirSync(path.resolve(__dirname, templateDir));
 
   // filter out any non-html directory contents
-  templateFiles = templateFiles.filter(item => /\.html$/i.test(item));
+  templateFiles = templateFiles.filter((item) => /\.html$/i.test(item));
 
   // return new array created from each html item
-  return templateFiles.map(item => new HtmlWebpackPlugin({
+  return templateFiles.map((item) => new HtmlWebpackPlugin({
     filename: item,
     template: path.resolve(__dirname, `${templateDir}/${item}`),
     favicon: './src/favicon/favicon.ico',
@@ -56,18 +57,22 @@ module.exports = {
 
       // src/scss/*.scss files
       {
-        test: /\.scss$/i,
+        test: /\.s[ac]ss$/i,
         include: path.resolve(__dirname, 'src/scss/'),
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: 'css-loader',
-              options: { minimize: true },
+        use: [
+          { loader: MiniCssExtractPlugin.loader },
+          { loader: 'css-loader' },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [
+                require('cssnano'),
+                require('autoprefixer'),
+              ],
             },
-            { loader: 'postcss-loader' },
-            { loader: 'sass-loader' },
-          ],
-        }),
+          },
+          { loader: 'sass-loader' },
+        ],
       },
 
       // src/img/ files
@@ -167,7 +172,8 @@ module.exports = {
   },
 
   plugins: [
-    new ExtractTextPlugin({
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
       filename: 'css/bundle.css',
     }),
     new BrowserSyncPlugin({
