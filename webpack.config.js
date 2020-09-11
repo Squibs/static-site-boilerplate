@@ -19,6 +19,7 @@ function generateHtmlPlugins(templateDir) {
     filename: item,
     template: path.resolve(__dirname, `${templateDir}/${item}`),
     favicon: './src/favicon/favicon.ico',
+    cache: false, // https://github.com/webpack/webpack/issues/10761  fixes hot-reload of css
   }));
 }
 
