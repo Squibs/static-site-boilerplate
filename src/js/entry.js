@@ -1,9 +1,7 @@
 // FontAwesome imports (https://fontawesome.com/how-to-use/use-with-node-js#free)
-import fontawesome from '@fortawesome/fontawesome';
-import faFontAwesomeAlt from '@fortawesome/fontawesome-free-brands/faFontAwesomeAlt';
-import faGulp from '@fortawesome/fontawesome-free-brands/faGulp';
-import faGrunt from '@fortawesome/fontawesome-free-brands/faGrunt';
-import faGithubAlt from '@fortawesome/fontawesome-free-brands/faGithubAlt';
+// New changes to FontAwesome new way: (https://fontawesome.com/how-to-use/on-the-web/advanced/svg-javascript-core)
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
+import { faFontAwesomeAlt, faGulp, faGrunt, faGithubAlt } from '@fortawesome/free-brands-svg-icons';
 
 import 'bootstrap'; // auto imports jQuery and Popper for bootstrap
 import './main'; // main.js
@@ -20,8 +18,9 @@ import '../favicon/mstile-150x150.png';
 import '../favicon/safari-pinned-tab.svg';
 import '../favicon/site.webmanifest';
 
-// add each icon to fontawesome library
-fontawesome.library.add(faFontAwesomeAlt, faGulp, faGrunt, faGithubAlt);
+// fontawesome: add each icon to fontawesome library
+library.add(faFontAwesomeAlt, faGulp, faGrunt, faGithubAlt);
+dom.watch(); // replace existing <i> tags with <svg> w/ MutationObserver continuously as DOM changes
 
 // //////////////////////////////////////////////////////////////////////////////////
 // Reduce entry.js size by importing Bootstrap plugins individually
