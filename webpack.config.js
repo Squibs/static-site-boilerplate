@@ -58,7 +58,7 @@ module.exports = {
 
       // src/scss/*.scss files
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.(sa|sc|c)ss$/i,
         include: path.resolve(__dirname, 'src/scss/'),
         use: [
           { loader: MiniCssExtractPlugin.loader },

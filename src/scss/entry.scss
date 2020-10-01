@@ -1,5 +1,12 @@
+// issues regarding importing normal css into sass
+// found while trying to import normalize.css
+// https://github.com/webpack-contrib/css-loader/issues/916
+// https://github.com/necolas/normalize.css/issues/745#issuecomment-415066830
+@import '~normalize.css/normalize';
+@import './test'; // test import of css into sass
 @import '~bootstrap/scss/bootstrap';
 @import './main.scss'; // load main css last to override other styles
+
 
 @font-face {
   font-family: 'rtRaleway';
