@@ -173,7 +173,10 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      verbose: true,
+      cleanStaleWebpackAssets: false,
+    }),
     new MiniCssExtractPlugin({
       filename: 'css/bundle.css',
     }),
