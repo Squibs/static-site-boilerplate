@@ -88,6 +88,7 @@ module.exports = {
               context: 'src',
               limit: 10000,
               fallback: 'file-loader',
+              publicPath: '../', // fixes url-loader/file-loader loacl url issues (url becomes: .././rest-of-url)
             },
           },
           { loader: 'img-loader' },
