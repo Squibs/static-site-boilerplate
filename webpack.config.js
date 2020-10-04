@@ -1,9 +1,15 @@
 const path = require('path');
+const fs = require('fs'); // node file system module (to read directory contents)
+
+// webpack plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const fs = require('fs'); // node file system module (to read directory contents)
+
+// postcss-loader plugins
+const cssnano = require('cssnano');
+const autoprefixer = require('autoprefixer');
 
 // Thank you to Frank Kelleher (extri.co)
 // https://extri.co/2017/07/11/generating-multiple-html-pages-with-htmlwebpackplugin/
@@ -67,8 +73,8 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               plugins: () => [
-                require('cssnano'),
-                require('autoprefixer'),
+                cssnano,
+                autoprefixer,
               ],
             },
           },
