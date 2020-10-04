@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 // postcss-loader plugins
 const cssnano = require('cssnano');
@@ -190,6 +191,11 @@ module.exports = {
     new BrowserSyncPlugin({
       proxy: 'localhost:8001',
       open: false, // tired of new tabs opening, have to open first tab manually now
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'disabled',
+      generateStatsFile: true,
+      statsFilename: '!DELETE-bundle-stats.json',
     }),
   ].concat(htmlPlugins), // Inserts a new HtmlWebpackPlugin for each .html file
 
