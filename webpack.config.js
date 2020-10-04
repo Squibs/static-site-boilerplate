@@ -183,6 +183,7 @@ module.exports = {
     }),
     new BrowserSyncPlugin({
       proxy: 'localhost:8001',
+      open: false, // tired of new tabs opening, have to open first tab manually now
     }),
   ].concat(htmlPlugins), // Inserts a new HtmlWebpackPlugin for each .html file
 
