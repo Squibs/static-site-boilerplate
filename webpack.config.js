@@ -85,7 +85,7 @@ module.exports = {
 
       // src/img/ files
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
+        test: /\.(jpe?g|png|gif|svg|webp)$/i,
         include: path.resolve(__dirname, 'src/img/'),
         use: [
           {
