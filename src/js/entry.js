@@ -18,6 +18,11 @@ import '../favicon/mstile-150x150.png';
 import '../favicon/safari-pinned-tab.svg';
 import '../favicon/site.webmanifest';
 
+// root files
+import '../^root/robots.txt';
+import '../^root/sitemap.xml';
+import '../^root/.htaccess';
+
 // fontawesome: add each icon to fontawesome library
 library.add(faFontAwesomeAlt, faGulp, faGrunt, faGithubAlt);
 dom.watch(); // replace existing <i> tags with <svg> w/ MutationObserver continuously as DOM changes
