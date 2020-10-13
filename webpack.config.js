@@ -195,7 +195,7 @@ module.exports = {
     new BundleAnalyzerPlugin({
       analyzerMode: 'disabled',
       generateStatsFile: true,
-      statsFilename: '!DELETE-bundle-stats.json',
+      statsFilename: '../bundle-stats.json',
     }),
   ].concat(htmlPlugins), // Inserts a new HtmlWebpackPlugin for each .html file
 

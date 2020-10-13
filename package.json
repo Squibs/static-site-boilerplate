@@ -10,7 +10,7 @@
     "watch": "vagrant up && webpack --watch --mode development",
     "start": "webpack-dev-server --open --mode development",
     "stop": "vagrant halt -f",
-    "stats": "webpack-bundle-analyzer public/!DELETE-bundle-stats.json"
+    "stats": "webpack-bundle-analyzer bundle-stats.json"
   },
   "keywords": [
     "Static",
