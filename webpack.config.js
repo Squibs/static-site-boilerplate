@@ -1,10 +1,12 @@
 const path = require('path');
 const fs = require('fs'); // node file system module (to read directory contents)
+const Dotenv = require('dotenv-webpack');
 
 // webpack plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+// const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
@@ -25,7 +27,7 @@ function generateHtmlPlugins(templateDir) {
   return templateFiles.map((item) => new HtmlWebpackPlugin({
     filename: item,
     template: path.resolve(__dirname, `${templateDir}/${item}`),
-    favicon: './src/favicon/favicon.ico',
+    // favicon: './src/favicon/favicon.ico',
     cache: false, // https://github.com/webpack/webpack/issues/10761  fixes hot-reload of css
   }));
 }
@@ -35,11 +37,17 @@ const htmlPlugins = generateHtmlPlugins('./src/');
 
 // Webpack Setup
 module.exports = {
-  entry: ['./src/js/entry.js', './src/scss/entry.scss'],
+  // switched to having a single entry point, line below is original entry setup
+  // entry: ['./src/js/entry.js', './src/scss/entry.scss'],
+  // switching allowed for multiple outputs of css or js files if wanted
+  entry: {
+    jsbundle: './src/js/entry.js',
+    // cssbundle: './src/scss/entry.scss',
+  },
 
   output: {
     path: path.resolve(__dirname, './public/'),
-    filename: 'js/bundle.js',
+    filename: 'js/[name].js',
   },
 
   module: {
@@ -51,7 +59,25 @@ module.exports = {
         use: [
           {
             loader: 'html-loader',
-            options: { minimize: true },
+            options: {
+              minimize: true,
+              attributes: {
+                list: [
+                  // adding in both data-src and data-srcset for lazy loading (https://github.com/aFarkas/lazysizes)
+                  '...', // All default supported tags and attributes
+                  {
+                    tag: 'source',
+                    attribute: 'data-src',
+                    type: 'src',
+                  },
+                  {
+                    tag: 'source',
+                    attribute: 'data-srcset',
+                    type: 'srcset',
+                  },
+                ],
+              },
+            },
           },
         ],
       },
@@ -66,17 +92,20 @@ module.exports = {
       // src/scss/*.scss files
       {
         test: /\.(sa|sc|c)ss$/i,
-        include: path.resolve(__dirname, 'src/scss/'),
+        // not having the following line allows for node_module files to be included when imported
+        // include: path.resolve(__dirname, 'src/scss/'),
         use: [
           { loader: MiniCssExtractPlugin.loader },
           { loader: 'css-loader' },
           {
             loader: 'postcss-loader',
             options: {
-              plugins: () => [
-                cssnano,
-                autoprefixer,
-              ],
+              postcssOptions: {
+                plugins: [
+                  [cssnano],
+                  [autoprefixer],
+                ],
+              },
             },
           },
           { loader: 'sass-loader' },
@@ -86,7 +115,7 @@ module.exports = {
       // src/img/ files
       {
         test: /\.(jpe?g|png|gif|svg|webp)$/i,
-        include: path.resolve(__dirname, 'src/img/'),
+        // include: path.resolve(__dirname, 'src/img/'),
         use: [
           {
             loader: 'url-loader',
@@ -95,7 +124,7 @@ module.exports = {
               context: 'src',
               limit: 10000,
               fallback: 'file-loader',
-              publicPath: '../', // fixes url-loader/file-loader loacl url issues (url becomes: .././rest-of-url)
+              publicPath: '../', // fixes url-loader/file-loader local url issues (url becomes: .././rest-of-url)
             },
           },
           { loader: 'img-loader' },
@@ -114,7 +143,7 @@ module.exports = {
               context: 'src',
               limit: 10000,
               fallback: 'file-loader',
-              publicPath: '../', // fixes url-loader/file-loader loacl url issues (url becomes: .././rest-of-url)
+              publicPath: '../', // fixes url-loader/file-loader local url issues (url becomes: .././rest-of-url)
             },
           },
         ],
@@ -151,7 +180,7 @@ module.exports = {
 
       // other root files
       {
-        test: /\.(txt|xml)$/i,
+        test: /\.(txt|xml|toml)$/i,
         include: path.resolve(__dirname, 'src/^root/'),
         use: [
           {
@@ -197,7 +226,15 @@ module.exports = {
       generateStatsFile: true,
       statsFilename: '../bundle-stats.json',
     }),
+    new Dotenv(), // use of .env files
   ].concat(htmlPlugins), // Inserts a new HtmlWebpackPlugin for each .html file
+  // .concat([new PreloadWebpackPlugin({ // preload fonts with <link red="pre-load"> https://stackoverflow.com/a/63645412
+  //   // fileWhitelist: [/\.(woff2?|eot|ttf|otf)(\?.*)?$/i],
+  //   fileWhitelist: [/\.(woff2)(\?.*)?$/i],
+  //   include: 'allAssets',
+  //   rel: 'preload',
+  //   as: 'font',
+  // })]),
 
   devServer: {
     contentBase: './build',

@@ -3,3 +3,4 @@ public
 .vagrant
 yarn-error.log
 bundle-stats.json
+.env

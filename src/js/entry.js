@@ -23,6 +23,12 @@ import '../^root/robots.txt';
 import '../^root/sitemap.xml';
 import '../^root/.htaccess';
 
+// css
+import '../scss/entry.scss';
+
+// others
+// import '../img/meta-image-min.jpg'; // meta tag og:image
+
 // fontawesome: add each icon to fontawesome library
 library.add(faFontAwesomeAlt, faGulp, faGrunt, faGithubAlt);
 dom.watch(); // replace existing <i> tags with <svg> w/ MutationObserver continuously as DOM changes
