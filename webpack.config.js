@@ -1,11 +1,12 @@
 const path = require('path');
 const fs = require('fs'); // node file system module (to read directory contents)
-const Dotenv = require('dotenv-webpack');
+// const webpack = require('webpack');
 
 // webpack plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 // const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -66,14 +67,29 @@ module.exports = {
                   // adding in both data-src and data-srcset for lazy loading (https://github.com/aFarkas/lazysizes)
                   '...', // All default supported tags and attributes
                   {
-                    tag: 'source',
+                    tag: 'source', // <picture> <source data-src> element (lazysizes)
                     attribute: 'data-src',
                     type: 'src',
                   },
                   {
-                    tag: 'source',
+                    tag: 'source', // <picture> <source data-srcset> element (lazysizes)
                     attribute: 'data-srcset',
                     type: 'srcset',
+                  },
+                  { // <img data-src> (lazysizes)
+                    tag: 'img',
+                    attribute: 'data-src',
+                    type: 'src',
+                  },
+                  {
+                    tag: 'img', // <img data-srcset> (lazysizes)
+                    attribute: 'data-srcset',
+                    type: 'srcset',
+                  },
+                  { // <video> <source src> element (default, html-loader didn't support it)
+                    tag: 'source',
+                    attribute: 'src',
+                    type: 'src',
                   },
                 ],
               },
@@ -120,7 +136,7 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              name: '[path][name].[ext]',
+              name: 'img/[name].[ext]',
               context: 'src',
               limit: 10000,
               fallback: 'file-loader',
@@ -128,6 +144,21 @@ module.exports = {
             },
           },
           { loader: 'img-loader' },
+        ],
+      },
+
+      // src/vid/ files
+      {
+        test: /\.mp4$/i,
+        // include: path.resolve(__dirname, 'src/vid/'),
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'vid/[name].[ext]',
+              publicPath: '../',
+            },
+          },
         ],
       },
 
@@ -226,7 +257,11 @@ module.exports = {
       generateStatsFile: true,
       statsFilename: '../bundle-stats.json',
     }),
-    new Dotenv(), // use of .env files
+    new Dotenv({
+      path: './.env',
+      allowEmptyValues: true,
+    }), // use of .env files
+    // new webpack.EnvironmentPlugin(['MAPBOX_API']),
   ].concat(htmlPlugins), // Inserts a new HtmlWebpackPlugin for each .html file
   // .concat([new PreloadWebpackPlugin({ // preload fonts with <link red="pre-load"> https://stackoverflow.com/a/63645412
   //   // fileWhitelist: [/\.(woff2?|eot|ttf|otf)(\?.*)?$/i],

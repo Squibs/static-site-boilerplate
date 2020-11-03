@@ -5,6 +5,7 @@ import { faFontAwesomeAlt, faGulp, faGrunt, faGithubAlt } from '@fortawesome/fre
 
 import 'bootstrap'; // auto imports jQuery and Popper for bootstrap
 import './main'; // main.js
+import 'lazysizes'; // Lazy load images lower in the page https://github.com/aFarkas/lazysizes
 
 // favicon related files (https://realfavicongenerator.net/)(might be (is) overkill)
 import '../favicon/android-chrome-192x192.png';
